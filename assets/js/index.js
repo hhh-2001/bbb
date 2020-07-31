@@ -31,10 +31,6 @@
     $.ajax({
         method: 'GET',
         url: '/my/userinfo',
-        // headers 就是请求头配置对象
-        // headers: {
-        //     Authorization: localStorage.getItem("token") || ''
-        // },
         success: function (res) {
 
             //1. 
@@ -128,47 +124,47 @@ $(function () {
         });
     })
     // 创建一个函数
-    function getUserInfo() {
-        $.ajax({
-            method: 'get',
-            url: '/my/userinfo',
-            // headers: {
-            //     Authorization: localStorage.getItem('token') || ''
-            // },
-            success: function (res) {
-                if (res.status != 0) {
-                    return layer.msg('获取用户信息失败');
-                }
-
-                // 如果有昵称就用昵称,否则用用户名
-                if (res.data.nickname == '') {
-                    // return layui.layer.msg(res.message)
-                    $('.userinfo .welcome').html(res.data.username);
-                } else {
-                    // 用昵称
-                    $('.userinfo .welcome').html(res.data.nickname);
-                }
-                if (res.data.user_pic) {
-                    $('.layui-nav-img').attr('src', res.data.user_pic).show();
-
-                } else {
-                    $('.text-avatar').html(res.data.username[0].toUpperCase()).show();
-
-                }
-
-                // renderAvatar(res.data);  
-            },
-            complete: function (res) {
-                // 登录拦截log
-                console.log(111);
-                if (res.responseJSON.status === 1) {
-                    console.log(222);
-                    localStorage.removeItem('token');
-                    location.href = '/login.html';
-                }
-            }
-        })
-    }
 
 
 })
+function getUserInfo() {
+    $.ajax({
+        method: 'get',
+        url: '/my/userinfo',
+        // headers: {
+        //     Authorization: localStorage.getItem('token') || ''
+        // },
+        success: function (res) {
+            if (res.status != 0) {
+                return layer.msg('获取用户信息失败');
+            }
+
+            // 如果有昵称就用昵称,否则用用户名
+            if (res.data.nickname == '') {
+                // return layui.layer.msg(res.message)
+                $('.userinfo .welcome').html(res.data.username);
+            } else {
+                // 用昵称
+                $('.userinfo .welcome').html(res.data.nickname);
+            }
+            if (res.data.user_pic) {
+                $('.layui-nav-img').attr('src', res.data.user_pic).show();
+
+            } else {
+                $('.text-avatar').html(res.data.username[0].toUpperCase()).show();
+
+            }
+
+            // renderAvatar(res.data);  
+        },
+        complete: function (res) {
+            // 登录拦截log
+            console.log(111);
+            if (res.responseJSON.status === 1) {
+                console.log(222);
+                localStorage.removeItem('token');
+                location.href = '/login.html';
+            }
+        }
+    })
+}
