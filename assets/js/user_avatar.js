@@ -99,6 +99,7 @@ $(function () {
                     return layer.msg("更换头像失败");
                 }
                 window.parent.getUserInfo();
+                
 
             }
         })
