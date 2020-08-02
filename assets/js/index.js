@@ -159,7 +159,7 @@ function getUserInfo() {
         },
         complete: function (res) {
             // 登录拦截log
-            console.log(111);
+
             if (res.responseJSON.status === 1) {
                 console.log(222);
                 localStorage.removeItem('token');
